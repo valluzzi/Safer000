@@ -22,7 +22,10 @@ RUN echo 'alias pip=pip3' >> ~/.bashrc
 # This will install GDAL
 ENV PROJ_LIB=/usr/share/proj
 ENV GDAL_DATA=/usr/share/data
-#RUN pip install GDAL==3.3.2
+
+
+# RUN pip install your-packages
+
 
 #--------------------------------------------------------                                                    
 #               EntryPoint
