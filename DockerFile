@@ -1,0 +1,32 @@
+#### Use latest Osgeo/gdal image
+#FROM osgeo/gdal:latest
+FROM ubuntu:22.04
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get install -y python3-pip 
+RUN apt-get install -y python3-gdal 
+RUN apt-get install -y gdal-bin locales
+
+# Set python aliases for python3
+RUN echo 'alias python=python3' >> ~/.bashrc
+RUN echo 'alias pip=pip3' >> ~/.bashrc
+
+#--------------------------------------------------------                                                    
+#               Python GDAL
+#--------------------------------------------------------
+# Update C env vars so compiler can find gdal
+#ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+#ENV C_INCLUDE_PATH=/usr/include/gdal
+
+# This will install GDAL
+ENV PROJ_LIB=/usr/share/proj
+ENV GDAL_DATA=/usr/share/data
+#RUN pip install GDAL==3.3.2
+
+#--------------------------------------------------------                                                    
+#               EntryPoint
+#--------------------------------------------------------
+# This is commented because it will be overwritten on docker creation
+# just for example
+#ENTRYPOINT safer000 --bbox 12.0,44.0,12.5,44.5 --from "2022-01-01 00:00:00Z" --to "2022-12-31 00:00:00Z" --out /mnt/efs/projects/username@gecosistema.com/.../out.tif
